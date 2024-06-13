@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\EditProductFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +33,8 @@ class DefaultController extends AbstractController
         {
             $product = new Product();
         }
-        $form = $this->createFormBuilder($product)
-            ->add('title', TextType::class)
-            ->getForm();
+
+        $form = $this->createForm(EditProductFormType::class, $product);
 
         $form->handleRequest($request);
 
